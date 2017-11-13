@@ -1,0 +1,9 @@
+@charset "ISO-8859-1";
+
+
+#genrelijst li{
+	
+	display:inline-block;
+	width: 0 auto;
+	
+}
