@@ -2,13 +2,13 @@ package pack.mikhail.entities;
 
 public class Genre {
 
-	private int id;
-	private String naam;
+	public int id;
+	public String naam;
 	
 	public Genre(int id, String naam) {
 		
-		this.id = id;
-		this.naam = naam;
+		setId(id);
+		setNaam(naam);
 		
 	}
 	

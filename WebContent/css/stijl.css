@@ -1,9 +1,37 @@
 @charset "ISO-8859-1";
 
 
-#genrelijst li{
+
+
+#mainContainer{width: 80%; margin: 0 auto;}
+
+
+
+<!-- styling tabel -->
+
+ul#genrelijst{
 	
-	display:inline-block;
-	width: 0 auto;
+	padding-left: 0px;
+	list-style: none;
+}
+
+ul#genrelijst li{
+	
+	display:inline;
+	
 	
 }
+
+th, td{
+	
+	padding: 1em;
+	
+}
+
+
+
+
+
+.oneven{background-color:#ccc;}
+
+
