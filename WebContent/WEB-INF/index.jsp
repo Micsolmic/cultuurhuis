@@ -6,13 +6,22 @@
 <head>
 <title>Zoek komende voorstellingen</title>
 <link rel='stylesheet' href='<c:url value="/css/stijl.css"/>'/>
+<link rel="shortcut icon" type="image/x-icon" href='<c:url value="/images/favicon.ico"/>' />
 </head>
 <body>
+	
 	
 	
 	<div id='mainContainer'>	
 			
 			<c:import url='/WEB-INF/header_1.jsp'/> 
+		
+		<c:if test='${sessionScope.mand.leeg == false}'>
+	
+	<a href='<c:url value="/bekijkmandje"/>'>Reservatiemandje</a>
+	<a href='<c:url value="/bevestiging"/>'>Bevestiging Reservatie</a>
+	
+	</c:if>
 			
 		<h2>Genres</h2>
 	
@@ -56,7 +65,7 @@
 	
 <tr <c:if test='${status.count%2==0}'>class='oneven'</c:if>>
 	
-    <td> <fmt:formatDate value='${voorstelling.datum}' pattern='d/M/yy hh:mm'/> </td>  
+    <td> <fmt:formatDate value='${voorstelling.datum}' pattern='d/M/yy HH:mm'/> </td>  
     <td>${voorstelling.titel}</td> 
     <td>${voorstelling.uitvoerders}</td>
     <td>&#8364;  <fmt:formatNumber value='${voorstelling.prijs}' minFractionDigits='2'/> </td>

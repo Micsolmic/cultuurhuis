@@ -2,7 +2,7 @@
     <wb-module deploy-name="cultuurhuis">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="cultuurhuis"/>
         <property name="java-output-path" value="/cultuurhuis/build/classes"/>
+        <property name="context-root" value="cultuurhuis"/>
     </wb-module>
 </project-modules>

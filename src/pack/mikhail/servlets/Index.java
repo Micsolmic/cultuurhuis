@@ -3,6 +3,7 @@ package pack.mikhail.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -49,7 +50,8 @@ public class Index extends HttpServlet {
 		if (request.getSession(false) == null) {
 
 			HttpSession session = request.getSession();
-			session.setAttribute("mandje", new Mandje());
+			Mandje mand = new Mandje();
+			session.setAttribute("mand", mand);
 		}
 		
 		//als er items in mandje zyn, laat de VIEW extra links tonen
@@ -64,7 +66,8 @@ public class Index extends HttpServlet {
 			request.setAttribute("genres", cultuurhuisRepository.getGenres());
 		} catch (SQLException ex) {
 			out.println(ex);
-		}
+		}  
+		
 		
 		
 		//als gebruiker een genre heeft gekozen haal alle relevante voorstellingen uit DB 
@@ -83,6 +86,8 @@ public class Index extends HttpServlet {
 			
 			
 		}
+		
+		
 
 		
 		//stuur request door naar VIEW
@@ -99,5 +104,7 @@ public class Index extends HttpServlet {
 	void setDataSource(DataSource dataSource) {
 		cultuurhuisRepository.setDataSource(dataSource);
 	}
+	
+	
 
 }

@@ -1,12 +1,12 @@
 package pack.mikhail.repositories;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -21,6 +21,7 @@ public class Repo {
 
 	private String SELECT_GENRES = "select * from genres order by naam";
 	private String PREPARED_VOORSTELLINGEN = "select * from voorstellingen where genreid=?";
+	private String PREPARED_VOORSTELLING = "select * from voorstellingen where id=?";
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -57,14 +58,51 @@ public class Repo {
 			while (resultSet.next()) {
 
 				Voorstelling vrstl = new Voorstelling(resultSet.getInt("id"), resultSet.getString("titel"),
-									 resultSet.getString("uitvoerders"), new Date(resultSet.getTimestamp("datum").getTime()), resultSet.getInt("genreid"),
-									 resultSet.getDouble("prijs"), resultSet.getInt("vrijeplaatsen"));
+						resultSet.getString("uitvoerders"), new Date(resultSet.getTimestamp("datum").getTime()),
+						resultSet.getInt("genreid"), resultSet.getDouble("prijs"), resultSet.getInt("vrijeplaatsen"));
 				lijst.add(vrstl);
 
 			}
 			return lijst;
 		}
-
 	}
+
+	public Voorstelling getVoorstellingById(int id) throws SQLException {
+
+		Voorstelling voorstelling = null;
+
+		try (Connection connection = dataSource.getConnection()) {
+
+			PreparedStatement statement = connection.prepareStatement(PREPARED_VOORSTELLING);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			resultSet.next();
+			voorstelling = new Voorstelling(resultSet.getInt("id"), resultSet.getString("titel"),
+					resultSet.getString("uitvoerders"), new Date(resultSet.getTimestamp("datum").getTime()),
+					resultSet.getInt("genreid"), resultSet.getDouble("prijs"), resultSet.getInt("vrijeplaatsen"));
+		}
+
+		return voorstelling;
+	}
+
+	/*
+	 * public Timestamp checkTimestamp(int genreId) throws SQLException {
+	 * 
+	 * Timestamp ts; try (Connection connection = dataSource.getConnection()) {
+	 * 
+	 * List<Voorstelling> lijst = new ArrayList<Voorstelling>();
+	 * 
+	 * PreparedStatement prepStatement =
+	 * connection.prepareStatement(PREPARED_VOORSTELLINGEN); prepStatement.setInt(1,
+	 * genreId); ResultSet resultSet = prepStatement.executeQuery();
+	 * 
+	 * resultSet.next();
+	 * 
+	 * // new Date(resultSet.getTimestamp("datum").getTime()); ts =
+	 * resultSet.getTimestamp("datum"); } return ts;
+	 * 
+	 * }
+	 * 
+	 */
 
 }
