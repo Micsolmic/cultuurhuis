@@ -10,7 +10,7 @@
 
 <style>
 
-form span{color:#AB4747; font-weight:bold;}
+
 dd{font-weight:bold;padding-bottom: 0.5em;}
 </style>
 
@@ -40,7 +40,7 @@ dd{font-weight:bold;padding-bottom: 0.5em;}
 Plaatsen: 
 <input id='plaatsen' type='number' name='plaatsen' value='${zitjes}'>
 <input type='hidden' name='voorstellingId' value='${voorstelling.id}' >
-<button id='reserveer' type='submit'>Reserveren</button><span id='fout'></span>
+<button id='reserveer' type='submit'>Reserveren</button><span class='fout'></span>
 
 </form>
 
@@ -54,7 +54,7 @@ window.onload = function(){
 var form = document.getElementById('form');
 var input = document.getElementById('plaatsen');
 var knop = document.getElementById('reserveer');
-var fout = document.getElementById('fout');
+var fout = document.getElementsByClassName('fout')[0];
 
 
 

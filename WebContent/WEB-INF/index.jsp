@@ -80,15 +80,12 @@
 	<a href='${reserveerUrl}'>Reserveer</a>
 	
 	</c:if>
-	
+	</td>
+	</tr>
 </c:forEach>	
 </tbody>
 </table>
-<p>
-<c:if test='${empty vsg}'>
-	<em>Momenteel geen voorstellingen</em>
-	</c:if>
-</p>
+
 
 	
 	

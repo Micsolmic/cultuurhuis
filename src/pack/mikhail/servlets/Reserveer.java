@@ -3,6 +3,7 @@ package pack.mikhail.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import pack.mikhail.entities.Mandje;
-import pack.mikhail.entities.Reservatie;
 import pack.mikhail.entities.Voorstelling;
 import pack.mikhail.repositories.Repo;
 
@@ -91,7 +91,19 @@ public class Reserveer extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		Mandje mandje = (Mandje) session.getAttribute("mand");
-		mandje.addReservatieRegel(voorstellingId, zitjes);
+		
+		HashMap<Integer, Integer> reserveringen = mandje.getReserveringen();
+		
+		
+		//indien zitjes al eerder besteld vr de voorstelling, tel oude en nieuwe zitjes samen 
+		if(reserveringen.get(voorstellingId)!=null){
+			
+			int zitjesAlBesteld = reserveringen.get(voorstellingId);
+			zitjes += zitjesAlBesteld;
+			
+		}
+		
+		mandje.addReservatieEntry(voorstellingId, zitjes);
 		
 		
 		response.sendRedirect(request.getContextPath()+"/bekijkmandje");

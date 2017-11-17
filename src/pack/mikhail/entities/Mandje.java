@@ -5,13 +5,20 @@ import java.util.HashMap;
 public class Mandje {
 	
 	
-	HashMap<Integer, Integer> reserveringen = new HashMap<>();
-	boolean leeg = true;
+	private HashMap<Integer, Integer> reserveringen = new HashMap<>();
+	private boolean leeg = true;
 	
-	public void addReservatieRegel(int idVoorstelling, int zitjes) {
+	public void addReservatieEntry(int idVoorstelling, int zitjes) {
 		
 		reserveringen.put(idVoorstelling, zitjes);
 		this.leeg = false;
+	}
+	
+	public void verwijderReservatieEntry(int idVoorstelling) {
+		
+		
+		reserveringen.remove(idVoorstelling);
+		
 	}
 	
 	public int getZitjes(int idVoorstelling){
@@ -23,6 +30,12 @@ public class Mandje {
 		};
 		
 		return -1;
+		
+	}
+	
+	public HashMap<Integer,Integer> getReserveringen(){
+		
+		return reserveringen;
 		
 	}
 

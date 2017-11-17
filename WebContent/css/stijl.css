@@ -28,10 +28,46 @@ th, td{
 	
 }
 
+form {padding-top: 0.5em;}
 
 
+form > * {
+	
+	display: block;
+	
+}
+
+button {
+	
+	margin: 0.2em 0;
+}
 
 
 .oneven{background-color:#ccc;}
 
+.fout{color:#AB4747; font-weight:bold;}
 
+
+/* .req is de foutboodsschap als inputveld niet ingevuld */
+
+.req{
+color:#AB4747; font-weight:bold;
+visibility: hidden;
+}
+
+#beschikbaarheid{
+	
+	color:#AB4747; font-weight:bold;
+	
+}
+
+#isBeschikbaar{
+	
+	color:#408080; font-weight:bold;
+	
+}
+
+#isNietBeschikbaar{
+	
+	color:#AB4747; font-weight:bold;
+}
