@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import pack.mikhail.entities.Klant;
+import pack.mikhail.entities.Mandje;
 import pack.mikhail.repositories.Repo;
 
 /**
@@ -24,6 +26,8 @@ public class NieuweKlant extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String VIEW = "/WEB-INF/nieuweklant.jsp";
+	private static final String REDIRECT_URL = "/bevestig";
+	
 	private final transient Repo cultuurhuisRepository = new Repo();
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,6 +45,18 @@ public class NieuweKlant extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// maak sessie indien nog niet bestaat
+				// en set mandje sessie attribuut
+				if (request.getSession(false) == null) {
+
+					HttpSession session = request.getSession();
+					Mandje mand = new Mandje();			
+					session.setAttribute("mand", mand);
+				}
+		
+		
+		
 		PrintWriter out = response.getWriter();
 		String voornaam = request.getParameter("voornaam");
 		String familienaam = request.getParameter("familienaam");
@@ -49,24 +65,46 @@ public class NieuweKlant extends HttpServlet {
 		int postcode = Integer.valueOf(request.getParameter("postcode"));		
 		String gemeente = request.getParameter("gemeente");
 		String gebruikersnaam = request.getParameter("gebruikersnaam");
+		String paswoord = request.getParameter("paswoord");
+		String herhaalPaswoord = request.getParameter("herhaalPaswoord");
+		
 		
 		//dummy id van 0
-		Klant  klantInWording = new Klant(0,voornaam,familienaam,straat,huisnr,postcode,gemeente,gebruikersnaam);
+		Klant  klantInWording = new Klant(0,voornaam,familienaam,straat,huisnr,postcode,gemeente,gebruikersnaam, paswoord);
 		try {
+			
+			
+			if(!paswoord.equals(herhaalPaswoord)) {
+				
+				request.setAttribute("klantInWording", klantInWording);
+				request.setAttribute("onpaswoordelijk", true);
+				request.getRequestDispatcher(VIEW).forward(request, response);
+				
+				
+			}	else {
+			
+			
 			if(cultuurhuisRepository.loginBestaatAl(gebruikersnaam)) {
 				request.setAttribute("loginBezet", true);
+				request.setAttribute("klantInWording", klantInWording);
 				request.getRequestDispatcher(VIEW).forward(request, response);
+				
+				
+				
 				
 			}else {
 				
-				cultuurhuisRepository.commitKlant(Klant);
 				
+				cultuurhuisRepository.commitKlant(klantInWording);
+				
+				response.sendRedirect(request.getContextPath()+REDIRECT_URL+"?klantAangemaakt=true");
+			}
 			}
 			
 		}catch(SQLException ex){out.println(ex);}
-		
+		}
 	 
-	}
+	
 
 	
 

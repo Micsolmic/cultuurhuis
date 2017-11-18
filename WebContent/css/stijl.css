@@ -45,7 +45,7 @@ button {
 
 .oneven{background-color:#ccc;}
 
-.fout{color:#AB4747; font-weight:bold;}
+.fout{color:#AB4747; font-weight:bold; font-size: 1.5em;}
 
 
 /* .req is de foutboodsschap als inputveld niet ingevuld */
@@ -55,19 +55,32 @@ color:#AB4747; font-weight:bold;
 visibility: hidden;
 }
 
-#beschikbaarheid{
+.success{
 	
-	color:#AB4747; font-weight:bold;
-	
+	color:#37782e; 
 }
 
-#isBeschikbaar{
-	
-	color:#408080; font-weight:bold;
-	
+.mislukt{color:#AB4747; font-weight:bold;	
 }
 
-#isNietBeschikbaar{
-	
-	color:#AB4747; font-weight:bold;
+
+
+
+
+
+@keyframes overgang {
+     0%   {color:#400000;}
+ 	
+    20%  {color:#ff0000; }
+    
+      
+    100% {color:#400000 }
+}
+
+/* The element to apply the animation to */
+.extrafout {
+    color:#400000;
+    animation-name: overgang;
+  
+    animation-duration: 8s;
 }

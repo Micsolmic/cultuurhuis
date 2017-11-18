@@ -20,7 +20,7 @@ public class Klant {
 		this.passwoord = passwoord;
 	}
 	public Klant(int id, String voornaam, String familienaam, String straat, int huisnr, int postcode, String gemeente,
-			String gebruikersnaam) {
+			String gebruikersnaam, String paswoord) {
 		
 		setId(id);
 		setVoornaam(voornaam);
@@ -30,7 +30,7 @@ public class Klant {
 		setPostcode(postcode);
 		setGemeente(gemeente);
 		setGebruikersnaam(gebruikersnaam);
-		
+		setPasswoord(paswoord);
 	}
 	public int getId() {
 		return id;

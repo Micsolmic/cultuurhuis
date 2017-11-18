@@ -6,11 +6,31 @@ public class Reservatieregel {
 	
 	private Voorstelling voorstelling;
 	private int plaatsen;
+	private int vrijePlaatsen;
+	private boolean gelukt;
 	
-	public Reservatieregel(Voorstelling voorstelling, int plaatsen) {
+	public boolean isGelukt() {
+		return gelukt;
+	}
+
+	public void setGelukt(boolean gelukt) {
+		this.gelukt = gelukt;
+	}
+
+	public int getVrijePlaatsen() {
+		return vrijePlaatsen;
+	}
+
+	public void setVrijePlaatsen(int vrijePlaatsen) {
+		this.vrijePlaatsen = vrijePlaatsen;
+	}
+
+	public Reservatieregel(Voorstelling voorstelling, int plaatsen, int vrijePlaatsen, boolean gelukt) {
 		
 		setVoorstelling(voorstelling);
 		setPlaatsen(plaatsen);
+		setVrijePlaatsen(vrijePlaatsen);
+		setGelukt(gelukt);
 	}
 
 	public Voorstelling getVoorstelling() {

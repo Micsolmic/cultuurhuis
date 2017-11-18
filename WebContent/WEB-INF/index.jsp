@@ -19,7 +19,7 @@
 		<c:if test='${sessionScope.mand.leeg == false}'>
 	
 	<a href='<c:url value="/bekijkmandje"/>'>Reservatiemandje</a>
-	<a href='<c:url value="/bevestiging"/>'>Bevestiging Reservatie</a>
+	<a href='<c:url value="/bevestig"/>'>Bevestiging Reservatie</a>
 	
 	</c:if>
 			

@@ -47,7 +47,12 @@ public class Mandje {
 		this.leeg = leeg;
 	}
 	
-
+	public void ledig() {
+		
+		reserveringen.clear();
+		this.leeg = true;
+		
+	}
 	
 
 }

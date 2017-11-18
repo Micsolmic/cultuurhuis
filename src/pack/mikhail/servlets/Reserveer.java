@@ -35,14 +35,19 @@ public class Reserveer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// maak sessie indien nog niet bestaat
+				// en set mandje sessie attribuut
+				if (request.getSession(false) == null) {
+
+					HttpSession session = request.getSession();
+					Mandje mand = new Mandje();			
+					session.setAttribute("mand", mand);
+				}
+		
+		
 		PrintWriter out = response.getWriter();
-	
-/*		if (request.getSession(false) == null) {
-			out.println("from inside if request.getses(false)");
-			HttpSession session = request.getSession();
-			session.setAttribute("mandje", new Mandje());
-		}
-		*/
+
+
 		Voorstelling voorstelling = null;
       
 	if (request.getParameter("voorstellingId") == null) {
@@ -74,6 +79,8 @@ public class Reserveer extends HttpServlet {
 			
 			
 	}
+	
+
 
 	}
 

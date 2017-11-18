@@ -18,6 +18,7 @@
 		var paswoord = document.getElementById("paswoord");
 		var herhaalPaswoord = document.getElementById("herhaalPaswoord");
 		var foutVeld = document.getElementsByClassName('fout')[0];
+		var extrafout = document.getElementById("extrafout");
 	
 		herhaalPaswoord.addEventListener("blur", function(){
 			
@@ -40,7 +41,7 @@
 	});
  	
 	 	
-
+	extrafout.className += " extrafout";
 					
 
 	};
@@ -70,20 +71,23 @@
 
 		<form id='nieuweKlant' method='post'>
 
-			<label>Voornaam:</label> <input type="text" name="voornaam" required></input>
-			<label>Familienaam:</label> <input type="text" name="familienaam"
-				required></input> <label>Straat:</label> <input type="text"
-				name="straat" required></input></input> <label>Huisnummer:</label> <input
-				type="number" name="huisnummer" required></input> <label>Postcode:</label>
-			<input type="number" name="postcode" required></input> <label>Gemeente:</label>
-			<input type="text" name="gemeente" required></input> <label>Gebruikersnaam:</label>
-			<input type="text" name="gebruikersnaam" required></input> <label>Paswoord:</label>
-			<input id="paswoord" type="password" name="paswoord" required></input> <label>Herhaal
-				paswoord:</label> <input id="herhaalPaswoord" type="password" 
-				required> <br>
+			<label>Voornaam:</label> <input type="text" name="voornaam" required value='${klantInWording.voornaam}'>
+			<label>Familienaam:</label> <input type="text" name="familienaam" required value='${klantInWording.familienaam}'>
+			 <label>Straat:</label> <input type="text"	name="straat" required value='${klantInWording.straat}'>
+			 <label>Huisnummer:</label> <input type="number" name="huisnummer" required value='${klantInWording.huisnr}'>
+			 <label>Postcode:</label><input type="number" name="postcode" required value='${klantInWording.postcode}'> 
+			 <label>Gemeente:</label><input type="text" name="gemeente" required value='${klantInWording.gemeente}'> 
+			 <label>Gebruikersnaam:</label><input type="text" name="gebruikersnaam" required value='${klantInWording.gebruikersnaam}'>
+			  <label>Paswoord:</label><input id="paswoord" type="password" name="paswoord" required > 
+			  <label>Herhaal paswoord:</label> <input id="herhaalPaswoord" name="herhaalPaswoord" type="password" required > <br>
 			<button type="submit" id="OK">OK</button>
 			<br> 
+			
+			<c:if test='${empty onpaswoordelijk}'>
 			<span class="fout"><c:if test='${loginBezet}'>Gebruikersnaam bestaat al. Kies een andere</c:if></span> 
+			</c:if>
+			
+			<span id="extrafout" class="fout"><c:if test='${onpaswoordelijk}'>paswoorden moeten overeenkomen</c:if></span> 
 
 		</form>
 
